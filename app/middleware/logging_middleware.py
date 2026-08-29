@@ -1,0 +1,16 @@
+"""
+Logs all incoming requests and outgoing responses
+"""
+import logging
+from urllib import response
+from starlette.middleware.base import BaseHTTPMiddleware
+
+class LogginMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request, call_next):
+        logging.info(f"Request: {request.method} {request.url}")
+
+        response = await call_next(request)
+
+        logging.info(f"Response: {response.status_code}")
+
+        return response
