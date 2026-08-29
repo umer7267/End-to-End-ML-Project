@@ -5,7 +5,7 @@ services:
     plan: free
     branch: main
     autoDeploy: true
-    dockerfilePath: .app/Dockerfile
+    dockerfilePath: app/Dockerfile
     envVars:
       - key: MODEL_PATH
         value: app/models/model.joblib
