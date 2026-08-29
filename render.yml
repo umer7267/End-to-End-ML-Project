@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: END-to-END-ML-Project
+    env: docker
+    plan: free
+    branch: main
+    autoDeploy: true
+    dockerfilePath: .app/Dockerfile
+    envVars:
+      - key: MODEL_PATH
+        value: app/models/model.joblib

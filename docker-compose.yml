@@ -1,7 +1,11 @@
 services:
   api:
-    build: /app
+    build:
+      context: .
+      dockerfile: app/Dockerfile
     container_name: end-to-end-ml-app
+    env_file:
+      - .env
     ports:
       - "8000:8000"
     environment:
