@@ -1,0 +1,299 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1220" viewBox="0 0 1600 1220" role="img" aria-labelledby="title desc">
+  <title id="title">End-to-End Car Price Prediction Platform Architecture</title>
+  <desc id="desc">Architecture showing the offline scikit-learn training pipeline, secured FastAPI inference with Redis caching, Prometheus and Grafana observability, and Docker Compose and Render deployment paths.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="1" stop-color="#0d1b2e"/>
+    </linearGradient>
+    <linearGradient id="hero" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#60a5fa"/>
+      <stop offset="0.52" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#34d399"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#000814" flood-opacity="0.38"/>
+    </filter>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#60a5fa"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#34d399"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#a78bfa"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#fbbf24"/>
+    </marker>
+    <style>
+      .title { font: 700 35px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #f8fafc; letter-spacing: .2px; }
+      .subtitle { font: 400 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #94a3b8; }
+      .lane-title { font: 700 17px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #e2e8f0; letter-spacing: 1.4px; }
+      .lane-note { font: 500 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #64748b; }
+      .card-title { font: 700 17px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #f8fafc; }
+      .card-subtitle { font: 600 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #94a3b8; letter-spacing: .7px; }
+      .body { font: 400 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #cbd5e1; }
+      .small { font: 400 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #94a3b8; }
+      .tiny { font: 600 11px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #64748b; }
+      .flow-label { font: 600 11px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #bfdbfe; paint-order: stroke; stroke: #0b1728; stroke-width: 5px; stroke-linejoin: round; }
+      .chip { font: 600 11px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #dbeafe; }
+      .lane { fill: #0b1728; stroke: #22324a; stroke-width: 1; }
+      .card { fill: #111f33; stroke: #2a3b53; stroke-width: 1.2; filter: url(#shadow); }
+      .inner { fill: #0d1a2d; stroke: #2a3b53; stroke-width: 1; }
+      .blue-line { fill: none; stroke: #60a5fa; stroke-width: 2.2; marker-end: url(#arrow-blue); }
+      .green-line { fill: none; stroke: #34d399; stroke-width: 2.2; marker-end: url(#arrow-green); }
+      .purple-line { fill: none; stroke: #a78bfa; stroke-width: 2.2; marker-end: url(#arrow-purple); }
+      .amber-line { fill: none; stroke: #fbbf24; stroke-width: 2.2; marker-end: url(#arrow-amber); }
+      .dash { stroke-dasharray: 6 6; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1220" rx="24" fill="url(#background)"/>
+  <rect x="46" y="35" width="7" height="55" rx="3.5" fill="url(#hero)"/>
+  <text x="75" y="63" class="title">Car Price Prediction Platform</text>
+  <text x="75" y="88" class="subtitle">End-to-end ML architecture • training, secured serving, cache-aside inference, observability &amp; deployment</text>
+  <g transform="translate(1120 48)">
+    <rect x="0" y="0" width="111" height="30" rx="15" fill="#102b47" stroke="#2563eb"/>
+    <text x="55" y="19" text-anchor="middle" class="chip">FASTAPI</text>
+    <rect x="121" y="0" width="128" height="30" rx="15" fill="#17233d" stroke="#7c3aed"/>
+    <text x="185" y="19" text-anchor="middle" class="chip">SCIKIT-LEARN</text>
+    <rect x="259" y="0" width="82" height="30" rx="15" fill="#103129" stroke="#059669"/>
+    <text x="300" y="19" text-anchor="middle" class="chip">REDIS</text>
+    <rect x="351" y="0" width="82" height="30" rx="15" fill="#352911" stroke="#d97706"/>
+    <text x="392" y="19" text-anchor="middle" class="chip">DOCKER</text>
+  </g>
+
+  <!-- Offline training -->
+  <rect x="36" y="115" width="1528" height="292" rx="18" class="lane"/>
+  <circle cx="58" cy="143" r="6" fill="#a78bfa"/>
+  <text x="74" y="149" class="lane-title">OFFLINE MODEL DEVELOPMENT</text>
+  <text x="1515" y="149" text-anchor="end" class="lane-note">reproducible feature engineering and artifact packaging</text>
+
+  <g transform="translate(70 180)">
+    <rect width="225" height="176" rx="14" class="card"/>
+    <rect width="225" height="5" rx="2.5" fill="#60a5fa"/>
+    <text x="20" y="39" class="card-subtitle">SOURCE DATA</text>
+    <text x="20" y="67" class="card-title">Car Details CSV</text>
+    <text x="20" y="93" class="body">6,926 rows • 16 columns</text>
+    <text x="20" y="116" class="body">Vehicle attributes + sale price</text>
+    <rect x="20" y="135" width="118" height="25" rx="12" fill="#102b47"/>
+    <text x="79" y="152" text-anchor="middle" class="chip">PANDAS INGEST</text>
+  </g>
+
+  <g transform="translate(350 180)">
+    <rect width="245" height="176" rx="14" class="card"/>
+    <rect width="245" height="5" rx="2.5" fill="#a78bfa"/>
+    <text x="20" y="39" class="card-subtitle">EXPLORATION</text>
+    <text x="20" y="67" class="card-title">Jupyter EDA</text>
+    <text x="20" y="93" class="body">Schema &amp; cardinality analysis</text>
+    <text x="20" y="116" class="body">Missing values + duplicate review</text>
+    <text x="20" y="139" class="body">Train/test RMSE evaluation</text>
+    <text x="20" y="160" class="small">notebooks/sample.ipynb</text>
+  </g>
+
+  <g transform="translate(650 180)">
+    <rect width="310" height="176" rx="14" class="card"/>
+    <rect width="310" height="5" rx="2.5" fill="#a78bfa"/>
+    <text x="20" y="39" class="card-subtitle">SKLEARN COLUMNTRANSFORMER</text>
+    <text x="20" y="67" class="card-title">Preprocessing Pipeline</text>
+    <text x="20" y="93" class="body">7 numeric → median impute → scale</text>
+    <text x="20" y="116" class="body">5 categorical → constant impute → OHE</text>
+    <text x="20" y="139" class="body">Unknown categories safely ignored</text>
+    <text x="20" y="160" class="small">High-cardinality name/model/edition dropped</text>
+  </g>
+
+  <g transform="translate(1015 180)">
+    <rect width="245" height="176" rx="14" class="card"/>
+    <rect width="245" height="5" rx="2.5" fill="#34d399"/>
+    <text x="20" y="39" class="card-subtitle">MODEL TRAINING</text>
+    <text x="20" y="67" class="card-title">Random Forest</text>
+    <text x="20" y="93" class="body">80 / 20 holdout split</text>
+    <text x="20" y="116" class="body">10 trees • max depth 5</text>
+    <text x="20" y="139" class="body">random_state = 42</text>
+    <text x="20" y="160" class="small">Transforms + model in one Pipeline</text>
+  </g>
+
+  <g transform="translate(1315 180)">
+    <rect width="205" height="176" rx="14" class="card"/>
+    <rect width="205" height="5" rx="2.5" fill="#34d399"/>
+    <text x="20" y="39" class="card-subtitle">VERSIONED ARTIFACT</text>
+    <text x="20" y="67" class="card-title">model.joblib</text>
+    <text x="20" y="93" class="body">Preprocessor + estimator</text>
+    <text x="20" y="116" class="body">Single deployable artifact</text>
+    <rect x="20" y="135" width="126" height="25" rx="12" fill="#103129"/>
+    <text x="83" y="152" text-anchor="middle" class="chip">JOBLIB EXPORT</text>
+  </g>
+
+  <path d="M295 268 H343" class="blue-line"/>
+  <path d="M595 268 H643" class="purple-line"/>
+  <path d="M960 268 H1008" class="purple-line"/>
+  <path d="M1260 268 H1308" class="green-line"/>
+
+  <!-- Online serving -->
+  <rect x="36" y="427" width="1528" height="420" rx="18" class="lane"/>
+  <circle cx="58" cy="455" r="6" fill="#60a5fa"/>
+  <text x="74" y="461" class="lane-title">ONLINE INFERENCE &amp; OBSERVABILITY</text>
+  <text x="1515" y="461" text-anchor="end" class="lane-note">authenticated request path with cache-aside acceleration</text>
+
+  <g transform="translate(70 560)">
+    <rect width="190" height="145" rx="14" class="card"/>
+    <rect width="190" height="5" rx="2.5" fill="#60a5fa"/>
+    <text x="20" y="39" class="card-subtitle">API CONSUMER</text>
+    <text x="20" y="67" class="card-title">Client Application</text>
+    <text x="20" y="94" class="body">JSON over HTTP</text>
+    <text x="20" y="117" class="body">OpenAPI docs available</text>
+  </g>
+
+  <rect x="315" y="490" width="744" height="320" rx="16" fill="#0c1b30" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="7 5"/>
+  <text x="338" y="518" class="card-subtitle">FASTAPI APPLICATION • UVICORN ASGI</text>
+
+  <g transform="translate(345 544)">
+    <rect width="195" height="100" rx="12" class="inner"/>
+    <text x="17" y="28" class="card-subtitle">AUTH ENDPOINT</text>
+    <text x="17" y="54" class="card-title">POST /login</text>
+    <text x="17" y="79" class="body">Issues 30-min HS256 JWT</text>
+  </g>
+  <g transform="translate(345 680)">
+    <rect width="195" height="100" rx="12" class="inner"/>
+    <text x="17" y="28" class="card-subtitle">PREDICTION ENDPOINT</text>
+    <text x="17" y="54" class="card-title">POST /predict</text>
+    <text x="17" y="79" class="body">Typed 12-feature payload</text>
+  </g>
+
+  <g transform="translate(585 544)">
+    <rect width="205" height="100" rx="12" class="inner"/>
+    <text x="17" y="28" class="card-subtitle">ACCESS CONTROL</text>
+    <text x="17" y="54" class="card-title">Security Dependencies</text>
+    <text x="17" y="79" class="body">JWT validation + API key</text>
+  </g>
+  <g transform="translate(585 680)">
+    <rect width="205" height="100" rx="12" class="inner"/>
+    <text x="17" y="28" class="card-subtitle">REQUEST CONTROLS</text>
+    <text x="17" y="54" class="card-title">Pydantic + Middleware</text>
+    <text x="17" y="77" class="small">validation • logs • error responses</text>
+  </g>
+
+  <g transform="translate(835 590)">
+    <rect width="194" height="145" rx="12" class="inner"/>
+    <text x="17" y="28" class="card-subtitle">INFERENCE LAYER</text>
+    <text x="17" y="54" class="card-title">Model Service</text>
+    <text x="17" y="79" class="body">Build cache key</text>
+    <text x="17" y="101" class="body">DataFrame → predict()</text>
+    <text x="17" y="123" class="body">Format predicted price</text>
+  </g>
+
+  <g transform="translate(1110 555)">
+    <rect width="205" height="160" rx="14" class="card"/>
+    <rect width="205" height="5" rx="2.5" fill="#34d399"/>
+    <text x="20" y="39" class="card-subtitle">CACHE-ASIDE</text>
+    <text x="20" y="67" class="card-title">Redis</text>
+    <text x="20" y="93" class="body">Input-derived lookup key</text>
+    <text x="20" y="116" class="body">Cache hit → fast response</text>
+    <text x="20" y="139" class="body">Cache miss → infer + store</text>
+  </g>
+
+  <g transform="translate(1360 510)">
+    <rect width="160" height="105" rx="14" class="card"/>
+    <rect width="160" height="5" rx="2.5" fill="#f59e0b"/>
+    <text x="18" y="38" class="card-subtitle">METRICS</text>
+    <text x="18" y="65" class="card-title">Prometheus</text>
+    <text x="18" y="87" class="small">scrape /metrics • 10s</text>
+  </g>
+  <g transform="translate(1360 660)">
+    <rect width="160" height="105" rx="14" class="card"/>
+    <rect width="160" height="5" rx="2.5" fill="#f59e0b"/>
+    <text x="18" y="38" class="card-subtitle">VISUALIZATION</text>
+    <text x="18" y="65" class="card-title">Grafana</text>
+    <text x="18" y="87" class="small">operational dashboards</text>
+  </g>
+
+  <path d="M260 588 H338" class="blue-line"/>
+  <text x="299" y="578" text-anchor="middle" class="flow-label">credentials</text>
+  <path d="M345 626 H282 Q270 626 270 614 V610" class="purple-line"/>
+  <text x="302" y="648" text-anchor="middle" class="flow-label">JWT</text>
+  <path d="M260 678 H338" class="blue-line"/>
+  <text x="299" y="668" text-anchor="middle" class="flow-label">JWT + API key</text>
+  <path d="M540 594 H578" class="purple-line"/>
+  <path d="M540 730 H578" class="blue-line"/>
+  <path d="M790 730 H828" class="blue-line"/>
+  <path d="M790 594 H812 Q824 594 824 606 V622 H828" class="purple-line"/>
+  <path d="M1029 635 H1103" class="green-line"/>
+  <text x="1066" y="625" text-anchor="middle" class="flow-label">GET / SET</text>
+  <path d="M1417 356 V465 Q1417 478 1404 478 H1005 Q992 478 992 490" class="green-line dash"/>
+  <text x="1215" y="470" text-anchor="middle" class="flow-label">load once at application startup</text>
+  <path d="M1059 525 H1328 Q1340 525 1340 537 V555 H1353" class="amber-line dash"/>
+  <text x="1210" y="516" text-anchor="middle" class="flow-label">instrumented HTTP metrics</text>
+  <path d="M1440 615 V653" class="amber-line"/>
+  <text x="1461" y="640" class="flow-label">query</text>
+
+  <!-- Deployment -->
+  <rect x="36" y="867" width="1528" height="305" rx="18" class="lane"/>
+  <circle cx="58" cy="895" r="6" fill="#fbbf24"/>
+  <text x="74" y="901" class="lane-title">PACKAGING, CONFIGURATION &amp; DEPLOYMENT</text>
+  <text x="1515" y="901" text-anchor="end" class="lane-note">same containerized API across local and cloud targets</text>
+
+  <g transform="translate(70 938)">
+    <rect width="260" height="174" rx="14" class="card"/>
+    <rect width="260" height="5" rx="2.5" fill="#64748b"/>
+    <text x="20" y="39" class="card-subtitle">RUNTIME CONFIG</text>
+    <text x="20" y="67" class="card-title">Environment Variables</text>
+    <text x="20" y="94" class="body">API_KEY • JWT_SECRET_KEY</text>
+    <text x="20" y="117" class="body">REDIS_URL • MODEL_PATH</text>
+    <text x="20" y="145" class="small">python-dotenv + central Settings</text>
+  </g>
+
+  <g transform="translate(390 938)">
+    <rect width="270" height="174" rx="14" class="card"/>
+    <rect width="270" height="5" rx="2.5" fill="#fbbf24"/>
+    <text x="20" y="39" class="card-subtitle">CONTAINER IMAGE</text>
+    <text x="20" y="67" class="card-title">Dockerfile</text>
+    <text x="20" y="94" class="body">Python 3.14 base</text>
+    <text x="20" y="117" class="body">Pinned Python dependencies</text>
+    <text x="20" y="140" class="body">Uvicorn on :8000</text>
+  </g>
+
+  <g transform="translate(720 920)">
+    <rect width="425" height="210" rx="14" class="card"/>
+    <rect width="425" height="5" rx="2.5" fill="#34d399"/>
+    <text x="20" y="39" class="card-subtitle">LOCAL / SELF-HOSTED TOPOLOGY</text>
+    <text x="20" y="67" class="card-title">Docker Compose • backend bridge</text>
+    <g transform="translate(20 91)">
+      <rect width="83" height="42" rx="9" fill="#102b47" stroke="#2563eb"/>
+      <text x="41" y="26" text-anchor="middle" class="chip">API :8000</text>
+      <rect x="96" width="91" height="42" rx="9" fill="#103129" stroke="#059669"/>
+      <text x="141" y="26" text-anchor="middle" class="chip">REDIS :6379</text>
+      <rect x="200" width="111" height="42" rx="9" fill="#352911" stroke="#d97706"/>
+      <text x="255" y="26" text-anchor="middle" class="chip">PROM :9090</text>
+      <rect x="324" width="81" height="42" rx="9" fill="#352911" stroke="#d97706"/>
+      <text x="364" y="26" text-anchor="middle" class="chip">UI :3000</text>
+    </g>
+    <text x="20" y="163" class="body">Service discovery • bridge network • mounted config</text>
+    <text x="20" y="187" class="small">Four coordinated services with declared dependencies</text>
+  </g>
+
+  <g transform="translate(1210 938)">
+    <rect width="310" height="174" rx="14" class="card"/>
+    <rect width="310" height="5" rx="2.5" fill="#a78bfa"/>
+    <text x="20" y="39" class="card-subtitle">CLOUD DEPLOYMENT</text>
+    <text x="20" y="67" class="card-title">Render Web Service</text>
+    <text x="20" y="94" class="body">Docker environment • main branch</text>
+    <text x="20" y="117" class="body">Automatic deploy enabled</text>
+    <text x="20" y="145" class="small">Model artifact packaged with the API image</text>
+  </g>
+
+  <path d="M330 1025 H383" class="blue-line dash"/>
+  <text x="356" y="1015" text-anchor="middle" class="flow-label">inject</text>
+  <path d="M660 1000 H713" class="amber-line"/>
+  <text x="686" y="990" text-anchor="middle" class="flow-label">local</text>
+  <path d="M660 1055 H1174 Q1186 1055 1186 1043 V1025 H1203" class="purple-line"/>
+  <text x="924" y="1046" text-anchor="middle" class="flow-label">cloud</text>
+
+  <text x="48" y="1200" class="tiny">CURRENT IMPLEMENTATION • Source of truth: training/, app/, docker-compose.yml, prometheus.yml and render.yml</text>
+  <g transform="translate(1180 1181)">
+    <line x1="0" y1="10" x2="32" y2="10" stroke="#60a5fa" stroke-width="2"/>
+    <text x="40" y="14" class="tiny">request / build flow</text>
+    <line x1="160" y1="10" x2="192" y2="10" stroke="#34d399" stroke-width="2"/>
+    <text x="200" y="14" class="tiny">data / model flow</text>
+  </g>
+</svg>
